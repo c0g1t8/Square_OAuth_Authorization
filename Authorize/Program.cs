@@ -1,5 +1,7 @@
-﻿using System;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using System;
 
 namespace Authorize
 {
@@ -8,13 +10,33 @@ namespace Authorize
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            var host = new WebHostBuilder()
-               .UseKestrel()
-               .UseUrls("http://*:5000")
-               .UseStartup<Startup>()
-               .Build();
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("appSettings.json")
+                .Build();
 
-            host.Run();
+            var services = new ServiceCollection();
+            ConfigureServices(services, config);
+            var serviceProvider = services.BuildServiceProvider();
+
+            // 
+            var requestor = serviceProvider.GetService<UserAuthorizationRequestor>();
+            requestor.SendRequest();
+            requestor.StartListening();
+            requestor.StopListening();
         }
+
+        private static void ConfigureServices(IServiceCollection services, IConfiguration config)
+        {
+            services
+                .AddSingleton<IConfiguration>(config)
+                .AddLogging(configure =>
+                {
+                    configure
+                    .AddConsole()
+                    .AddConfiguration(config.GetSection("Logging"));
+                })
+                .AddSingleton<UserAuthorizationRequestor>();
+        }
+
     }
 }
