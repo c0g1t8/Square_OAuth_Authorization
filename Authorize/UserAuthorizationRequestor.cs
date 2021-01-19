@@ -41,10 +41,11 @@ namespace Authorize
             var s = config["CallbackUrls"];
 
             var host = new WebHostBuilder()
-               .UseKestrel()
-               .UseUrls(config["CallbackUrls"])
-               .UseStartup<Startup>()
-               .Build();
+                .UseKestrel()
+                .UseUrls(config["CallbackUrls"])
+                .SuppressStatusMessages(true) // disable messages to console
+                .UseStartup<Startup>()
+                .Build();
 
             host.Run();
         }
