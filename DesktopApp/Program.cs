@@ -1,12 +1,21 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace DesktopApp
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var hostBuilder = Host.CreateDefaultBuilder(args)
+                  .ConfigureServices((hostctx, services) =>
+                 {
+                     services.AddHostedService<ConsoleHostedService>();
+                 });
+
+            await hostBuilder.RunConsoleAsync();
         }
     }
 }
