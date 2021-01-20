@@ -10,10 +10,10 @@ namespace DesktopApp
         static async Task Main(string[] args)
         {
             var hostBuilder = Host.CreateDefaultBuilder(args)
-                  .ConfigureServices((hostctx, services) =>
-                 {
-                     services.AddHostedService<ConsoleHostedService>();
-                 });
+                .ConfigureServices((hostctx, services) =>
+                {
+                    services.AddHostedService<ConsoleHostedService>();
+                });
 
             await hostBuilder.RunConsoleAsync();
         }
