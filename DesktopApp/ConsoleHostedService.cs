@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -30,10 +31,18 @@ namespace DesktopApp
                 {
                     try
                     {
-                        logger.LogInformation("Hello World!");
+                        logger.LogInformation("Starting notepad");
 
-                        // Simulate real work is being done
-                        await Task.Delay(1000);
+                        Process p = new Process()
+                        {
+                            StartInfo = new ProcessStartInfo()
+                            {
+                                FileName = "notepad.exe",
+                                CreateNoWindow = true
+                            }
+                        };
+                        p.Start();
+                        await p.WaitForExitAsync();
 
                         exitCode = 0;
                     }
