@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopApp", "DesktopApp\DesktopApp.csproj", "{200B504C-C7AE-4BC3-BE23-9E746FCAC5B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesktopApp", "DesktopApp\DesktopApp.csproj", "{200B504C-C7AE-4BC3-BE23-9E746FCAC5B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authorize", "Authorize\Authorize.csproj", "{E8B7B75E-4F7D-4F3C-BAC4-C0CCB4019329}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authorize", "Authorize\Authorize.csproj", "{E8B7B75E-4F7D-4F3C-BAC4-C0CCB4019329}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{200B504C-C7AE-4BC3-BE23-9E746FCAC5B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -44,5 +41,11 @@ Global
 		{E8B7B75E-4F7D-4F3C-BAC4-C0CCB4019329}.Release|x64.Build.0 = Release|Any CPU
 		{E8B7B75E-4F7D-4F3C-BAC4-C0CCB4019329}.Release|x86.ActiveCfg = Release|Any CPU
 		{E8B7B75E-4F7D-4F3C-BAC4-C0CCB4019329}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1511F054-6457-4788-9771-0BB73654FF43}
 	EndGlobalSection
 EndGlobal
