@@ -25,6 +25,7 @@ namespace Authorize
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddControllers();
             services.AddSingleton<AuthorizationResponseService>();
         }
 
@@ -52,6 +53,7 @@ namespace Authorize
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
         }
     }
