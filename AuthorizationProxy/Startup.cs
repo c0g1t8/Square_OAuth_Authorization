@@ -1,3 +1,4 @@
+using AuthorizationProxy.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +27,7 @@ namespace AuthorizationProxy
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSingleton<AuthorizationResponseService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
