@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AuthorizationProxy.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class AuthorizationRequest : ControllerBase
     {
@@ -34,7 +34,6 @@ namespace AuthorizationProxy.Controllers
                 config["SquareApplicationId"],
                 "MERCHANT_PROFILE_READ+ORDERS_WRITE+PAYMENTS_WRITE");
 
-            //return Redirect(url);
             return Redirect(url);
         }
 
