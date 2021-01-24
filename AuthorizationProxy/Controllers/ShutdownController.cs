@@ -11,14 +11,14 @@ namespace AuthorizationProxy.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class Shutdown : ControllerBase
+    public class ShutdownController : ControllerBase
     {
         private readonly IHostApplicationLifetime lifetime;
-        private readonly ILogger<Shutdown> log;
+        private readonly ILogger<ShutdownController> log;
 
-        public Shutdown(
+        public ShutdownController(
             IHostApplicationLifetime lifetime,
-            ILogger<Shutdown> log)
+            ILogger<ShutdownController> log)
         {
             this.lifetime = lifetime;
             this.log = log;
