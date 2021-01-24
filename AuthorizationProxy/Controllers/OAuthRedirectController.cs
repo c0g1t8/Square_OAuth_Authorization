@@ -13,14 +13,14 @@ namespace AuthorizationProxy.Controllers
 {
     [Route("oauth-redirect")]
     [ApiController]
-    public class OAuth_Redirect : ControllerBase
+    public class OAuthRedirectController : ControllerBase
     {
         private readonly AuthorizationResponseService responseService;
-        private readonly ILogger<OAuth_Redirect> log;
+        private readonly ILogger<OAuthRedirectController> log;
 
-        public OAuth_Redirect(
+        public OAuthRedirectController(
             AuthorizationResponseService responseService,
-            ILogger<OAuth_Redirect> log)
+            ILogger<OAuthRedirectController> log)
         {
             this.responseService = responseService;
             this.log = log;

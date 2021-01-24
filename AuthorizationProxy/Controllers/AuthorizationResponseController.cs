@@ -11,14 +11,14 @@ namespace AuthorizationProxy.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class AuthorizationResponse : ControllerBase
+    public class AuthorizationResponseController : ControllerBase
     {
         private readonly AuthorizationResponseService responseService;
-        private readonly ILogger<AuthorizationResponse> log;
+        private readonly ILogger<AuthorizationResponseController> log;
 
-        public AuthorizationResponse(
+        public AuthorizationResponseController(
             AuthorizationResponseService responseService,
-            ILogger<AuthorizationResponse> log)
+            ILogger<AuthorizationResponseController> log)
         {
             this.responseService = responseService;
             this.log = log;
