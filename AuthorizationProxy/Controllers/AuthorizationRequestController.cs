@@ -50,22 +50,26 @@ namespace AuthorizationProxy.Controllers
             string squareApplicationId,
             string scope)
         {
+            if (string.IsNullOrEmpty(squareApplicationId))
+            {
+                throw new ArgumentException("Missing square application Id");
+            }
+
+            if (string.IsNullOrEmpty(scope))
+            {
+                throw new ArgumentException("Scope must be specified");
+            }
+
             string authorizationBaseUrl = squareEnvironment == "Production" ?
                 "https://connect.squareup.com/" : "https://connect.squareupsandbox.com/";
 
-            // based on https://developer.squareup.com/docs/oauth-api/best-practices#session
-            // force user to explicitly login for production. Omit for sandbox
+            string url = authorizationBaseUrl + "oauth2/authorize";
+            url += $"?client_id={squareApplicationId}";
+            url += $"&scope={scope}";
+            // Based on https://developer.squareup.com/docs/oauth-api/best-practices#session
+            // Force user to explicitly login for production. Omit for sandbox
             // https://developer.squareup.com/docs/oauth-api/walkthrough#step-2-link-to-the-square-authorization-page
-            string session = squareEnvironment == "Production" ? "&session=false" : "";
-
-            var sb = new StringBuilder();
-            sb.Append(authorizationBaseUrl);
-            sb.Append("oauth2/authorize?client_id=");
-            sb.Append(squareApplicationId);
-            sb.Append("&scope=");
-            sb.Append(scope);
-            sb.Append(session);         // this will an empty string for Sandbox
-            string url = sb.ToString();
+            url += squareEnvironment == "Production" ? "&session=false" : "";
 
             return url;
         }
