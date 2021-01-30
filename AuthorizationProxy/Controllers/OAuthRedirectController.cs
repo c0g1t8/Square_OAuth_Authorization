@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
@@ -35,7 +36,12 @@ namespace AuthorizationProxy.Controllers
 
             responseService.AuthorizationResponse = json;
 
-            return Ok("Authorization process completed.");
+            return new ContentResult
+            {
+                ContentType = "text/html",
+                StatusCode = (int)HttpStatusCode.OK,
+                Content = System.IO.File.ReadAllText(@"OAuthRedirect.html")
+            };
         }
     }
 }
