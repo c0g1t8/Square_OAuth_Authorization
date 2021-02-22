@@ -28,7 +28,9 @@ namespace AuthorizationProxy.Controllers
         [HttpGet]
         public IActionResult GetSquareAuthorization()
         {
-            // need authorization to allow merchants to recieve payments
+            logger.LogInformation("Application authorization request - redirect to Square OAuth service");
+
+            // need authorization to allow merchants to receive payments
             string url = AuthorizationUrl(
                 config["SquareEnvironment"],
                 config["SquareApplicationId"],
@@ -60,7 +62,7 @@ namespace AuthorizationProxy.Controllers
                 throw new ArgumentException("Scope must be specified");
             }
 
-            string authorizationBaseUrl = squareEnvironment == "Production" ?
+            string authorizationBaseUrl = squareEnvironment.Equals("Production", StringComparison.OrdinalIgnoreCase) ?
                 "https://connect.squareup.com/" : "https://connect.squareupsandbox.com/";
 
             string url = authorizationBaseUrl + "oauth2/authorize";

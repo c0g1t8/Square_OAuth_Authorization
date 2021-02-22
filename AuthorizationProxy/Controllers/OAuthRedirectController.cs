@@ -1,6 +1,9 @@
 ﻿using AuthorizationProxy.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -16,26 +19,54 @@ namespace AuthorizationProxy.Controllers
     [ApiController]
     public class OAuthRedirectController : ControllerBase
     {
-        private readonly AuthorizationResponseService responseService;
-        private readonly ILogger<OAuthRedirectController> log;
+        private readonly IpcHookService hookService;
+        private readonly IServiceScopeFactory serviceScopeFactory;
+        private readonly IConfiguration config;
+        private readonly ILogger<OAuthRedirectController> logger;
 
         public OAuthRedirectController(
-            AuthorizationResponseService responseService,
-            ILogger<OAuthRedirectController> log)
+            IpcHookService hookService,
+            IServiceScopeFactory serviceScopeFactory,
+            IConfiguration config,
+            ILogger<OAuthRedirectController> logger)
         {
-            this.responseService = responseService;
-            this.log = log;
+            this.hookService = hookService;
+            this.serviceScopeFactory = serviceScopeFactory;
+            this.config = config;
+            this.logger = logger;
         }
 
         [HttpGet]
-        public IActionResult GetSquareResponse()
+        public async Task<IActionResult> GetSquareResponseAsync()
         {
+            logger.LogInformation("OAuth Redirect - process response");
+
             var queryString = HttpContext.Request.QueryString.Value;
             var dict = HttpUtility.ParseQueryString(queryString);
             var json = JsonSerializer.Serialize(dict.AllKeys.ToDictionary(k => k, k => dict[k]));
 
-            responseService.AuthorizationResponse = json;
+            //*** send response to process that spawned the proxy server
+            await hookService.SendMessageAsync(json);
 
+            //*** run a background task that will stop the proxy server after this function returns
+            // https://docs.microsoft.com/en-us/aspnet/core/performance/performance-best-practices?view=aspnetcore-3.1#do-not-capture-services-injected-into-the-controllers-on-background-threads
+            _ = Task.Run(async () =>
+            {
+                int delay;
+                if (!int.TryParse(config["AutoShutdownTime"], out delay))
+                {
+                    delay = 1000;
+                }
+                await Task.Delay(delay);
+
+                using (var scope = serviceScopeFactory.CreateScope())
+                {
+                    var lifetime = scope.ServiceProvider.GetRequiredService<IHostApplicationLifetime>();
+                    lifetime.StopApplication();
+                }
+            });
+
+            //*** respond with pre-built html page
             return new ContentResult
             {
                 ContentType = "text/html",
