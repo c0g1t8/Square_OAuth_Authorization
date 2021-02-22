@@ -27,7 +27,7 @@ namespace AuthorizationProxy
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSingleton<AuthorizationResponseService>();
+            services.AddSingleton<IpcHookService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +48,9 @@ namespace AuthorizationProxy
             {
                 endpoints.MapControllers();
             });
+
+            // force initialization of IpcHookService.
+            app.ApplicationServices.GetService<IpcHookService>();
         }
     }
 }

@@ -19,7 +19,6 @@
     },
     "AuthorizationProxy": {
       "commandName": "Project",
-      "launchBrowser": true,
       "launchUrl": "AuthorizationRequest",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

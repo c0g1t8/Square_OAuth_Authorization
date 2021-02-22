@@ -351,3 +351,4 @@ MigrationBackup/
 
 # ignore development settings
 *.[Dd]evelopment.json
+*.[Pp]roduction.json
