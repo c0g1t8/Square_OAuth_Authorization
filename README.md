@@ -1,5 +1,8 @@
 # Retrieving Authorization Code from Square - Proof of Concept
 
+| ⚠️ THERE ARE INHERENT SECURITY RISKS IN USING THIS SOLUTION. Square recommends the use of a secure backend. Please see this [Sandbox 101: OAuth Best Practices video](https://www.youtube.com/watch?v=3gLqCJC6kLI) on YouTube. |
+| --- |
+
 ## Background
 
 A [feature request](https://developer.squareup.com/forums/t/retrieve-oauth-authorization-code-without-https-server/1470) was made on the [Square Developer Forums](https://developer.squareup.com/forums/) to be allow direct retrieval of an OAuth *authorization code* without the use of an HTTPS server.
