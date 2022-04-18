@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Pipes;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
+[assembly: SupportedOSPlatform("windows")]
 namespace AuthorizationProxy.Services
 {
     public class IpcHookService : IDisposable

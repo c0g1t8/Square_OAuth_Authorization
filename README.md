@@ -34,5 +34,5 @@ This guide assumes some familiarity with the [Square Developer Dashboard](https:
 
     ``` powershell
     dotnet build
-    dotnet run -p .\ConsoleApp\ 
+    dotnet run --project .\ConsoleApp\ 
     ```
