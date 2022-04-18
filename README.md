@@ -9,9 +9,9 @@ A [feature request](https://developer.squareup.com/forums/t/retrieve-oauth-autho
 
 In this case, the user had a desktop application and wished not to deploy a web server for this process. OAuth protocol uses a callback requires the authorization server to redirect to a known link. [Reference](https://developer.squareup.com/docs/oauth-api/how-oauth-works).
 
-## Solution
+## Solution for Windows
 
-A solution would be to encapsulate the retrieval of the authorization code in a stand-alone web application running on the desktop that could be called by a desktop application. It is implemented in [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet/3.1).
+A solution would be to encapsulate the retrieval of the authorization code in a stand-alone web application running on the desktop that could be called by a desktop application. It is implemented in [.NET 6](https://dotnet.microsoft.com/download/dotnet/6.0).
 
 The repository consists of:
 
