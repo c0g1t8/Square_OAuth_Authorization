@@ -1,5 +1,8 @@
 # Retrieving Authorization Code from Square - Proof of Concept
 
+| ⚠️ THERE ARE INHERENT SECURITY RISKS IN USING THIS SOLUTION. Square recommends the use of a secure backend. Please see this [Sandbox 101: OAuth Best Practices video](https://www.youtube.com/watch?v=3gLqCJC6kLI) on YouTube. |
+| --- |
+
 ## Background
 
 A [feature request](https://developer.squareup.com/forums/t/retrieve-oauth-authorization-code-without-https-server/1470) was made on the [Square Developer Forums](https://developer.squareup.com/forums/) to be allow direct retrieval of an OAuth *authorization code* without the use of an HTTPS server.
@@ -8,7 +11,7 @@ In this case, the user had a desktop application and wished not to deploy a web 
 
 ## Solution
 
-A solution would be to encapsulate the retrieval of the authorization code in a stand-alone web application that could be called by a desktop application. It is implemented in [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet/3.1).
+A solution would be to encapsulate the retrieval of the authorization code in a stand-alone web application running on the desktop that could be called by a desktop application. It is implemented in [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet/3.1).
 
 The repository consists of:
 
